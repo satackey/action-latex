@@ -20,4 +20,4 @@ runs:
   args:
     - sh
     - -c
-    - echo $BUILD_FILES | xargs -I{} latexmk ${{ inputs.latexmk-options }} {}
+    - echo $BUILD_FILES | xargs -I{} -t sh -c 'TEX_PATH="{}"; cd $(dirname {}); latexmk ${{ inputs.latexmk-options }} "$TEX_PATH"'
