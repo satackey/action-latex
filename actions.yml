@@ -1,0 +1,23 @@
+name: 'Upload'
+description: 'Upload files to Google Drive'
+inputs:
+  docker-image:
+    description: "Docker image to execute latexmk command"
+    required: true
+
+  build-files:
+    description: "List of TeX files separated by lines to build"
+    required: true
+
+  latexmk-options:
+    required: false
+
+runs:
+  using: 'docker'
+  image: docker://${{ inputs.docker-image }}
+  env:
+    BUILD_FILES: ${{ inputs.build-files }}
+  args:
+    - sh
+    - -c
+    - echo $BUILD_FILES | xargs -I{} latexmk ${{ inputs.latexmk-options }} {}
