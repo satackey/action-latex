@@ -14,7 +14,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: docker://${{ inputs.docker-image }}
+  image: ${{ inputs.docker-image }}
   env:
     BUILD_FILES: ${{ inputs.build-files }}
   args:
