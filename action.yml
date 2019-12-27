@@ -21,6 +21,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
+    BUILD_IMAGE: ${{ inputs.docker-image }}
     WORKDIR: ${{ inputs.workdir }}
     BUILD_FILES: ${{ inputs.build-files }}
     LATEXMK_OPTIONS: ${{ inputs.latexmk-options }}
