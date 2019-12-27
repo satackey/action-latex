@@ -4,6 +4,11 @@ inputs:
   docker-image:
     description: "Docker image to execute latexmk command"
     required: true
+  
+  workdir:
+    description: "Working directory in "
+    required: false
+    default: /work
 
   build-files:
     description: "List of TeX files separated by lines to build"
@@ -14,9 +19,11 @@ inputs:
 
 runs:
   using: 'docker'
-  image: ${{ inputs.docker-image }}
+  image: docker://docker:stable-dind-rootless
   env:
+    WORKDIR: ${{ inputs.workdir }}
     BUILD_FILES: ${{ inputs.build-files }}
+    LATEXMK_OPTIONS: ${{ inputs.latexmk-options }}
   args:
     - sh
     - -c
