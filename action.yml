@@ -19,7 +19,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: docker://docker:stable-dind-rootless
+  image: 'Dockerfile'
   env:
     WORKDIR: ${{ inputs.workdir }}
     BUILD_FILES: ${{ inputs.build-files }}
