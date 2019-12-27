@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 docker ps
 
 docker pull $BUILD_IMAGE
