@@ -1,4 +1,4 @@
-name: 'Upload'
+name: 'Build with latexmk'
 description: 'Upload files to Google Drive'
 inputs:
   docker-image:
@@ -24,7 +24,3 @@ runs:
     WORKDIR: ${{ inputs.workdir }}
     BUILD_FILES: ${{ inputs.build-files }}
     LATEXMK_OPTIONS: ${{ inputs.latexmk-options }}
-  args:
-    - sh
-    - -c
-    - echo $BUILD_FILES | xargs -I{} -t sh -c 'TEX_PATH="{}"; cd $(dirname {}); latexmk ${{ inputs.latexmk-options }} "$TEX_PATH"'
