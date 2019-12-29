@@ -1,25 +1,30 @@
 name: 'Build with latexmk'
 description: 'Upload files to Google Drive'
+
 inputs:
   docker-image:
-    description: "Docker image to execute latexmk command"
+    description: 'Docker image to execute latexmk command'
     required: true
 
   host-workspace:
-    description: "Location of directory to build"
+    description: 'Location of directory to build'
     required: false
 
   container-workdir:
-    description: "Working directory in container"
+    description: 'Working directory in container'
     required: false
     default: /work
 
   build-files:
-    description: "List of TeX files separated by lines to build"
+    description: 'List of TeX files separated by lines to build'
     required: true
 
   latexmk-options:
     required: false
+
+branding:
+  icon: file-text
+  color: green
 
 runs:
   using: 'docker'

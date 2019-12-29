@@ -1,11 +1,11 @@
 #!/bin/sh
 docker pull $BUILD_IMAGE
 
-BUILD_FILE_CMD="sh -c '
-    TEX_FILE={}
-    cd $(dirname \$TEX_FILE)
-    latexmk $LATEXMK_OPTIONS $(basename \$TEX_FILE)
-'"
+BUILD_FILE_CMD="
+    TEX_FILE=\"{}\"
+    cd \$(dirname \"\$TEX_FILE\")
+    latexmk $LATEXMK_OPTIONS \$(basename \"\$TEX_FILE\")
+"
 
 DEFAULT_WORKSPACE="$RUNNER_WORKSPACE/$(basename $RUNNER_WORKSPACE)"
 HOST_WORKSPACE=${HOST_WORKSPACE:-$DEFAULT_WORKSPACE}
@@ -16,5 +16,5 @@ docker run \
     --entrypoint '' \
     $BUILD_IMAGE \
     sh -c "
-        echo \"$BUILD_FILES\" | xargs -I{} -P $(nproc) -t $BUILD_FILE_CMD
+        echo \"$BUILD_FILES\" | xargs -I{} -P $(nproc) -t sh -c '$BUILD_FILE_CMD'
     "
