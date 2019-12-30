@@ -1,4 +1,4 @@
-name: 'Build with latexmk'
+name: 'Build LaTeX with any Docker image'
 description: 'Upload files to Google Drive'
 
 inputs:
