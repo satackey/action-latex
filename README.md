@@ -7,27 +7,27 @@ DooD(Docker outside of Docker)を使っているため、任意Dockerイメー�
 
 ### `docker-image`
 
-**必須** `latexmk`コマンドを実行するためのレジストリで公開されている Docker イメージ
+_**必須**_ `latexmk`コマンドを実行するためのレジストリで公開されている Docker イメージ
 
 ### `build-files`
 
-**必須** 1行ごとに区切られたビルドするファイルリスト
+_**必須**_ 1行ごとに区切られたビルドするファイルリスト
 (`host-workspace`からの相対パス)  
-デフォルトは`actions/checkout`でチェックアウトされるパスです。
 
 ### `host-workspace`
 
-**任意** ビルドするファイルのディレクトリ
+_任意_ ビルドするファイルのディレクトリ
 (ホストVMの絶対パス)  
 このパスがDockerコンテナにマウントされます。
+デフォルトは`actions/checkout`でチェックアウトされるパスです。
 
 ### `container-workdir`
 
-**任意** コンテナ内のワークディレクトリ
-このパスへDockerコンテナにマウントされます。
+_任意_ コンテナ内のワークディレクトリ  
+`host-workspace`で指定されたディレクトリが、Dockerコンテナ内のこのパスへマウントされます。
 
 ### `latexmk-options`
-**任意** `latexmk`コマンド実行時のオプション
+_任意_ `latexmk`コマンド実行時のオプション
 
 ## 使用例
 
