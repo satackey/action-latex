@@ -1,5 +1,8 @@
-FROM docker:stable
+FROM docker:stable AS docker-cli
 
-WORKDIR /src
-COPY entrypoint.sh ./
+FROM alpine
+
+COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
+
+COPY entrypoint.sh /src/
 ENTRYPOINT /src/entrypoint.sh
