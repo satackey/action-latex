@@ -13,7 +13,7 @@ inputs:
     required: true
 
   host-workspace:
-    description: 'Absolute path of the host VM directory where the files to be built are located'
+    description: Absolute path of the host VM directory where the files to be built are located
     required: false
 
   build-entrypoint:
