@@ -30,7 +30,7 @@ branding:
 
 runs:
   using: docker
-  image: Dockerfile
+  image: docker://satackey/action-latex:v2.0.0
   env:
     BUILD_IMAGE: ${{ inputs.docker-image }}
     BUILD_FILES: ${{ inputs.build-files }}
