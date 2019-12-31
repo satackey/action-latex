@@ -1,20 +1,28 @@
 #!/bin/sh
+
+echo Pull the Docker image
 docker pull $BUILD_IMAGE
 
-BUILD_FILE_CMD="
-    TEX_FILE=\"{}\"
-    cd \$(dirname \"\$TEX_FILE\")
-    latexmk $LATEXMK_OPTIONS \$(basename \"\$TEX_FILE\")
+ARG_ENTRYPOINT=""
+if [ -n "$BUILD_ENTRYPOINT" ]; then
+    ARG_ENTRYPOINT="--entrypoint \"$BUILD_ENTRYPOINT\""
+fi
+
+ARG_MOUNT=""
+BUILD_DIR="$PWD"
+if [ -n "$HOST_WORKSPACE" ]; then
+    ARG_MOUNT="-v \"$HOST_WORKSPACE\":/custom/workspace"
+    BUILD_DIR="/custom/workspace"
+fi
+
+echo "$BUILD_FILES" | xargs -I{TEX_FILE} -P $(nproc) -t sh -c "
+    WORKDIR=\"$BUILD_DIR/\$(dirname ./{TEX_FILE})\"
+    docker run --rm \\
+        --volumes-from $(basename $(cat /proc/1/cpuset)) \\
+        $ARG_ENTRYPOINT \\
+        $ARG_MOUNT \\
+        --workdir=\"\$WORKDIR\" \\
+        $BUILD_IMAGE \\
+        $BUILD_ARGS \\
+        \$(basename {TEX_FILE})
 "
-
-DEFAULT_WORKSPACE="$RUNNER_WORKSPACE/$(basename $RUNNER_WORKSPACE)"
-HOST_WORKSPACE=${HOST_WORKSPACE:-$DEFAULT_WORKSPACE}
-
-docker run \
-    -v "$HOST_WORKSPACE":"$WORKDIR" \
-    --workdir="$WORKDIR" \
-    --entrypoint '' \
-    $BUILD_IMAGE \
-    sh -c "
-        echo \"$BUILD_FILES\" | xargs -I{} -P $(nproc) -t sh -c '$BUILD_FILE_CMD'
-    "
