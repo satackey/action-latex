@@ -1,39 +1,63 @@
 # action-latex
 
-このアクションは指定されたファイル・コマンドでコンパイルを行います。
+<!-- このアクションは指定されたファイル・コマンドでコンパイルを行います。
 
 このアクションの実行で起動されたコンテナ内で、
 DooD(Docker outside of Docker)を使うことで、
-任意Dockerイメージを起動しています。
+任意Dockerイメージを起動しています。 -->
+
+This action builds LaTeX files on any Docker image.
 
 ## Inputs
 
 ### `docker-image`
 
-_**必須**_ コンパイルコマンドを実行する Docker イメージ
+
+<!-- コンパイルコマンドを実行する Docker イメージ -->
+- _**Required**_  
+
+    Docker image published on Dockerhub that runs build.  
 
 ### `build-files`
 
-_**必須**_ 1行ごとに区切られた、ビルドするTeXファイルの相対パスのリスト
+<!-- 1行ごとに区切られた、ビルドするTeXファイルの相対パスのリスト -->
+- _**Required**_  
 
-### `host-workspace`
+    A Line-separated list of paths of the TeX files to build.  
+    These paths must be relative to `working-directory`.  
 
-_任意_ ビルドするファイルがあるホストVMディレクトリの絶対パス
+<!-- ### `host-workspace`
+
+- _Optional_ 　
+    ビルドするファイルがあるホストVMディレクトリの絶対パス
+    Absolute path of the host VM directory where the file to be built is located.
+
+    If not specified, 
 
 指定されなかった場合、アクションより起動された Docker コンテナの `/github/workspace` ディレクトリがコンパイル用の Docker コンテナへマウントされます。  
-指定された場合、そのパスがコンパイル用の Docker コンテナの `/custom/workspace` ディレクトリにマウントされます。
+指定された場合、そのパスがコンパイル用の Docker コンテナの `/custom/workspace` ディレクトリにマウントされます。 -->
 
 ### `build-entrypoint`
 
-_任意_ コンパイル時に起動する Docker コンテナの Entrypoint  
+- _optional_  
+
+    The entrypoint of Docker container that runs build.  
+    If not specified, the Docker container starts using default entrypoint.
+
+<!-- _任意_ コンパイル時に起動する Docker コンテナの Entrypoint  
 指定されなければ Docker イメージの Entrypoint で起動されます。
-`latexmk` などを指定してください。
+`latexmk` などを指定してください。 -->
 
 ### `build-args`
 
-_任意_ コンパイル実行時の追加オプション
+- _optional_  
 
-## 使用例
+    Extra arguments to run the build.  
+
+
+<!-- _任意_ コンパイル実行時の追加オプション -->
+
+## Example
 
 ```yaml
 - name: Build LaTeX files
@@ -42,7 +66,7 @@ _任意_ コンパイル実行時の追加オプション
     docker-image: paperist/alpine-texlive-ja
     build-entrypoint: latexmk
     build-files: |
-      hoge/main.tex
-      fuga/main.tex
-      piyo/main.tex
+      foo/main.tex
+      bar/main.tex
+      baz/main.tex
 ```
