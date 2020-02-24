@@ -1,27 +1,23 @@
 name: Build LaTeX on any Docker image
 description: |
-  Multiple file builds are supported.
+  Parallel build of multiple files is supported, and you can use customized Docker image.
 #   You can use not only latexmk but also pacdoc etc.
 
 inputs:
   docker-image:
-    description: Docker image to execute compile command
+    description: Docker image published on Dockerhub that runs build.
     required: true
 
   build-files:
-    description: List of relative paths of TeX files to build, separated by lines
+    description: A Line-separated list of paths of the TeX files to build.
     required: true
 
-  host-workspace:
-    description: Absolute path of the host VM directory where the files to be built are located
-    required: false
-
   build-entrypoint:
-    description: Entrypoint of Docker container to be started at compile
+    description: The entrypoint of Docker container that runs build.
     required: false
 
   build-args:
-    description: Extra arguments used with the compile command.
+    description: Extra arguments to run the build.
     required: false
 
 branding:
@@ -30,10 +26,9 @@ branding:
 
 runs:
   using: docker
-  image: docker://satackey/action-latex:v2.0.0
+  image: docker://Dockerfile
   env:
     BUILD_IMAGE: ${{ inputs.docker-image }}
     BUILD_FILES: ${{ inputs.build-files }}
-    HOST_WORKSPACE: ${{ inputs.host-workspace }}
     BUILD_ENTRYPOINT: ${{ inputs.build-entrypoint }}
     BUILD_ARGS: ${{ inputs.build-args }}
