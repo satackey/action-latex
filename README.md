@@ -8,6 +8,20 @@ DooD(Docker outside of Docker)を使うことで、
 
 This action builds LaTeX files on any Docker image.
 
+## Example
+
+```yaml
+- name: Build LaTeX files
+  uses: satackey/action-latex@v2
+  with:
+    docker-image: paperist/alpine-texlive-ja
+    build-entrypoint: latexmk
+    build-files: |
+      foo/main.tex
+      bar/main.tex
+      baz/main.tex
+```
+
 ## Inputs
 
 ### `docker-image`
@@ -57,16 +71,7 @@ This action builds LaTeX files on any Docker image.
 
 <!-- _任意_ コンパイル実行時の追加オプション -->
 
-## Example
+## Contribution
+PRs are accepted.
 
-```yaml
-- name: Build LaTeX files
-  uses: satackey/action-latex@v2
-  with:
-    docker-image: paperist/alpine-texlive-ja
-    build-entrypoint: latexmk
-    build-files: |
-      foo/main.tex
-      bar/main.tex
-      baz/main.tex
-```
+If you are having trouble or future request, [post new issue](https://github.com/satackey/action-latex/issues/new).
