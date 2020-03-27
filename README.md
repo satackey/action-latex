@@ -74,4 +74,4 @@ This action builds LaTeX files on any Docker image.
 ## Contribution
 PRs are accepted.
 
-If you are having trouble or future request, [post new issue](https://github.com/satackey/action-latex/issues/new).
+If you are having trouble or feature request, [post new issue](https://github.com/satackey/action-latex/issues/new).
