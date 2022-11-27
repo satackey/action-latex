@@ -1,4 +1,4 @@
-name: Build LaTeX on any Docker image
+name: Build LaTeX on any Docker image (fork by nagata-yoshiteru)
 description: |
   Parallel build of multiple files is supported, and you can use customized Docker image.
 #   You can use not only latexmk but also pacdoc etc.
