@@ -26,7 +26,7 @@ branding:
 
 runs:
   using: docker
-  image: docker://Dockerfile
+  image: Dockerfile
   env:
     BUILD_IMAGE: ${{ inputs.docker-image }}
     BUILD_FILES: ${{ inputs.build-files }}
