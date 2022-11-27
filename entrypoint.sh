@@ -18,10 +18,10 @@ fi
 echo "$BUILD_FILES" | xargs -I{TEX_FILE} -P $(nproc) -t sh -c "
     WORKDIR=\"$BUILD_DIR/\$(dirname ./{TEX_FILE})\"
     docker run --rm \\
-        --volumes-from $(basename $(cat /proc/1/cpuset)) \\
+        -v \$WORKDIR:/workdir \\
         $ARG_ENTRYPOINT \\
         $ARG_MOUNT \\
-        --workdir=\"\$WORKDIR\" \\
+        --workdir=\"/workdir\" \\
         $BUILD_IMAGE \\
         $BUILD_ARGS \\
         \$(basename {TEX_FILE})
